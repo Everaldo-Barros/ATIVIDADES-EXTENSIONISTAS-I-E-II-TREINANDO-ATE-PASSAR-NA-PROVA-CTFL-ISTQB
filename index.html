@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Treinamento interativo para a certificacao CTFL ISTQB Foundation Level." />
+    <title>CTFL Quest | Treinamento ISTQB</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#" id="brandLink" aria-label="Pagina inicial">
+        <span class="brand-mark">CQ</span>
+        <span>CTFL <b>Quest</b></span>
+      </a>
+      <nav class="nav-actions" aria-label="Navegacao principal">
+        <button class="nav-link" id="statsButton" type="button">Meu progresso</button>
+        <a class="official-link" href="https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" target="_blank" rel="noreferrer">
+          Syllabus oficial <span aria-hidden="true">↗</span>
+        </a>
+      </nav>
+    </header>
+
+    <main id="app">
+      <section class="hero" id="homeView">
+        <div class="hero-copy">
+          <div class="eyebrow"><span></span> CTFL • ISTQB Foundation Level v4.0</div>
+          <h1>Treine. Evolua.<br /><em>Passe na prova.</em></h1>
+          <p>Questões interativas organizadas pelos principais temas do syllabus. Aprenda com feedback imediato e acompanhe sua evolução.</p>
+          <div class="hero-actions">
+            <button class="primary-button" id="startButton" type="button">Começar treinamento <span>→</span></button>
+            <button class="text-button" id="evaluationButton" type="button">Simulado CTFL · 40 questões · 1 hora</button>
+          </div>
+          <div class="hero-stats">
+            <div><strong id="questionCount">120</strong><span>questões</span></div>
+            <div><strong id="moduleCount">6</strong><span>módulos</span></div>
+            <div><strong>60 min</strong><span>por simulado</span></div>
+          </div>
+        </div>
+        <aside class="progress-card" aria-label="Resumo do progresso">
+          <div class="card-head">
+            <div>
+              <span>Seu progresso</span>
+              <strong id="progressPercent">0%</strong>
+            </div>
+            <div class="progress-ring" id="progressRing"><span id="ringValue">0</span></div>
+          </div>
+          <div class="progress-track"><div id="progressBar"></div></div>
+          <p><b id="completedCount">0</b> de <b id="totalCount">120</b> questões respondidas</p>
+          <button id="continueButton" type="button">Continuar estudo <span>→</span></button>
+        </aside>
+      </section>
+
+      <section class="modules-section" id="modulesView">
+        <div class="section-heading">
+          <div>
+            <span class="section-kicker">Conteúdo</span>
+            <h2>Escolha um módulo</h2>
+          </div>
+          <span class="shuffle-note"><i></i> Questões e alternativas aleatórias</span>
+        </div>
+        <div class="module-grid" id="moduleGrid"></div>
+      </section>
+
+      <section class="quiz-view hidden" id="quizView">
+        <div class="quiz-header">
+          <button class="back-button" id="backButton" type="button">← Voltar</button>
+          <div class="quiz-progress">
+            <span id="quizModuleName">Módulo</span>
+            <div class="quiz-track"><div id="quizProgressBar"></div></div>
+            <b id="quizCounter">1 / 5</b>
+          </div>
+          <div class="quiz-timer hidden" id="quizTimer" role="timer" aria-live="polite">
+            <span>Tempo restante</span>
+            <strong id="timerDisplay">60:00</strong>
+          </div>
+        </div>
+        <article class="question-card">
+          <span class="question-label" id="questionLabel">Questão 1</span>
+          <h2 id="questionText"></h2>
+          <div class="answers" id="answers"></div>
+          <div class="feedback hidden" id="feedback" role="status">
+            <strong id="feedbackTitle"></strong>
+            <p id="feedbackText"></p>
+          </div>
+          <button class="primary-button next-button hidden" id="nextButton" type="button">Próxima questão <span>→</span></button>
+        </article>
+      </section>
+
+      <section class="result-view hidden" id="resultView">
+        <article class="result-card">
+          <div class="result-icon" id="resultIcon">✓</div>
+          <span class="section-kicker" id="resultKicker">Resultado</span>
+          <h2 id="resultTitle"></h2>
+          <p id="resultMessage"></p>
+          <div class="score-display">
+            <strong id="scoreValue">0%</strong>
+            <span>de aproveitamento</span>
+            <span id="correctCount">0 / 40 corretas</span>
+          </div>
+          <div class="result-actions">
+            <button class="primary-button" id="retryButton" type="button">Tentar novamente</button>
+            <button class="text-button" id="certificateButton" type="button">Emitir certificado</button>
+          </div>
+        </article>
+      </section>
+      <footer class="source-footer">
+        Questões autorais baseadas no
+        <a href="https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/" target="_blank" rel="noreferrer">ISTQB CTFL Syllabus v4.0.1</a>,
+        disponível sob licença CC BY 4.0. A fonte e o capítulo aparecem no feedback de cada resposta.
+      </footer>
+    </main>
+
+    <dialog id="statsDialog">
+      <button class="dialog-close" id="closeStats" type="button" aria-label="Fechar">×</button>
+      <span class="section-kicker">Desempenho</span>
+      <h2>Meu progresso</h2>
+      <div class="stats-grid">
+        <div><strong id="dialogAnswered">0</strong><span>Respondidas</span></div>
+        <div><strong id="dialogCorrect">0</strong><span>Acertos</span></div>
+        <div><strong id="dialogAccuracy">0%</strong><span>Aproveitamento</span></div>
+      </div>
+      <button class="primary-button" id="resetProgress" type="button">Reiniciar progresso</button>
+    </dialog>
+
+    <dialog id="certificateDialog">
+      <button class="dialog-close" id="closeCertificate" type="button" aria-label="Fechar">×</button>
+      <div class="certificate" id="certificate">
+        <span class="brand-mark">CQ</span>
+        <span class="certificate-label">Certificado simbólico de desempenho</span>
+        <h2 id="certificateName">Treinamento CTFL</h2>
+        <p>Concluiu a avaliação com aproveitamento igual ou superior a 90%.</p>
+        <strong id="certificateScore">90%</strong>
+        <div class="certificate-footer">
+          <span>CTFL Quest</span>
+          <span id="certificateDate"></span>
+        </div>
+      </div>
+      <button class="primary-button" id="printCertificate" type="button">Imprimir certificado</button>
+    </dialog>
+
+    <script src="app.js"></script>
+  </body>
+</html>
